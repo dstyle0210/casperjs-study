@@ -1,2 +1,2 @@
-# casperjs-study
-캐스퍼js 공부하기
+# selenium study
+셀레니움 공부하기

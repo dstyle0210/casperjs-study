@@ -1,0 +1,14 @@
+{
+  "name": "ds-selenium-nike",
+  "version": "1.0.0",
+  "description": "",
+  "main": "nike.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "selenium-webdriver": "^3.4.0"
+  }
+}
