@@ -11,13 +11,13 @@ driver.findElement(By.css('.global_login a')).click();
 driver.wait(function(){
     return until.elementLocated(By.name('loginId'));
 },1000);
-driver.findElement(By.name('loginId')).sendKeys('');
-driver.findElement(By.name('password')).sendKeys('');
+driver.findElement(By.name('loginId')).sendKeys(''); // 수정필요.
+driver.findElement(By.name('password')).sendKeys(''); // 수정필요.
 driver.findElement(By.css('.global_id_pass_info a')).click();
 driver.sleep(100);
 driver.wait(function(){
     return driver.executeScript(function(){
-        return $(".ul_index:eq(0) > a").text().trim()=="원용봉 님";
+        return $(".ul_index:eq(0) > a").text().trim()==""; // 수정필요.
     });
 },500).then(function(){
     reCartCheck();
