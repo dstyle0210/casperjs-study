@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script>
+</head>
+<body>
+<div id="sneaker">
+    <ul>
+        <li v-for="month in sneakers">
+            <h2>{{month.title}}</h2>
+            <ul>
+                <li v-for="day in month.days">{{day.title}}
+                    <article v-for="sneaker in day.lists">{{sneaker.store}} - {{sneaker.name}}</article>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<script>
+var promise1 = new Promise(function(res,rej){
+    $.ajax({
+        url: "./SneakerReleaseCalendar/eastbay.json",
+        beforeSend: function( xhr ) {
+            console.log("eastBay Start");
+        }
+    }).done(function( data ) {
+        res(data);
+    });
+});
+var promise2 = new Promise(function(res,rej){
+    $.ajax({
+        url: "./SneakerReleaseCalendar/footlocker.json",
+        beforeSend: function( xhr ) {
+            console.log("FootLocker Start");
+        }
+    }).done(function( data ) {
+        res(data);
+    });
+});
+Promise.all([promise1, promise2]).then(function (values) {
+
+    var merge = values[0].concat(values[1]);
+    var sneakers = {}
+    $.each(merge,function(idx,SK){
+        if(idx==0){ console.log(SK); };
+        // 월 설정
+        if(!sneakers[SK.year+"-"+SK.month]){ // 기존에 없으면
+            sneakers[SK.year+"-"+SK.month] = { title:SK.year+"-"+SK.month , days:{} };
+        };
+        // 일설정
+        if(!sneakers[SK.year+"-"+SK.month].days[SK.day]){
+            sneakers[SK.year+"-"+SK.month].days[SK.day] = {title:SK.day,lists:[]};
+        };
+        sneakers[SK.year+"-"+SK.month].days[SK.day].lists.push(SK);
+        // console.log(SK);
+    });
+    console.log(sneakers);
+
+    console.log("모두 완료됨", values);
+    var app = new Vue({
+        el: '#sneaker',
+        data: {
+            sneakers:sneakers
+        }
+    })
+});
+
+
+
+</script>
+</body>
+</html>
