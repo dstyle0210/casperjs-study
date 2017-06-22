@@ -7,13 +7,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script>
 </head>
 <body>
+<style>
+ul.lists{width:100%;overflow:hidden;}
+ul.lists>li{width:100%;overflow:hidden;}
+.sneakers{width:100%;overflow:hidden;}
+.sneaker{position:relative;float:left;margin-left:5px;border:1px solid #ccc;box-sizing:border-box;padding:10px;width:150px;height:250px;overflow:hidden;}
+.sneaker .photo{width:130px;height:130px;overflow:hidden;background:#f5f5f5;}
+.sneaker .photo img{width:100%;height:auto;}
+.sneaker p{font-size:13px;}
+.sneaker .store{display:inline-block;position:absolute;top:0;right:0;font-size:12px;font-family:tahoma;padding:3px 5px;}
+.sneaker .store.eastbay{background:#f6d046;}
+.sneaker .store.footlocker{background:#e71836;color:#fff;}
+</style>
 <div id="sneaker">
     <ul>
         <li v-for="month in sneakers">
             <h2>{{month.title}}</h2>
-            <ul>
-                <li v-for="day in month.days">{{day.title}}
-                    <article v-for="sneaker in day.lists">{{sneaker.store}} - {{sneaker.name}}</article>
+            <ul class="lists">
+                <li v-for="day in month.days">
+                    <h3>{{day.title}}</h3>
+                    <div class="sneakers">
+                        <article v-for="sneaker in day.lists" class="sneaker">
+                            <div class="photo"><img :src="sneaker.image" alt="" onerror="this.style.display='none';" width="100" height="100" /></div>
+                            <span class="store" :class="sneaker.store">{{sneaker.store}}</span>
+                            <p>{{sneaker.name}}</p>
+                        </article>
+                    </div>
                 </li>
             </ul>
         </li>
@@ -57,6 +76,18 @@ Promise.all([promise1, promise2]).then(function (values) {
         sneakers[SK.year+"-"+SK.month].days[SK.day].lists.push(SK);
         // console.log(SK);
     });
+
+    $.each(sneakers,function(idx,month){
+        var data = month.days;
+        var ordered = {};
+        Object.keys(data).sort().forEach(function(key) {
+            ordered[key] = data[key];
+        });
+        console.log(ordered);
+    });
+
+
+
     console.log(sneakers);
 
     console.log("모두 완료됨", values);

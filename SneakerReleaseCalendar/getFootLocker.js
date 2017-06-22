@@ -21,9 +21,9 @@ driver.wait(function(){
     var DB = [];
     var json = JSON.parse(text);
     _.each(json.month,function(month){
-        if(month.name=="May"){ month.number = "05"; }
-        if(month.name=="Jun"){ month.number = "06"; }
-        if(month.name=="Jul"){ month.number = "07"; }
+        if(month.name=="May"){ month.number = "5"; }
+        if(month.name=="Jun"){ month.number = "6"; }
+        if(month.name=="Jul"){ month.number = "7"; }
         _.each(month.day,function(day){
             _.each(day.product,function(product){
                 DB.push({
@@ -32,10 +32,11 @@ driver.wait(function(){
                     name:product.name+"",
                     price:"",
                     link:"http://www.footlocker.com/product/model:"+product.model+"/sku:"+product.sku+"/",
-                    year:month.year+"",
-                    month:month.number+"",
-                    day:(((day.date*1)<10) ? "0"+day.date : day.date)+"",
-                    color:product.color+""
+                    year:(month.year*1)+"",
+                    month:(month.number*1)+"",
+                    day:(day.date*1)+"",
+                    color:product.color+"",
+                    image:"http://images.footlocker.com/pi/"+product.sku+"/large/"
                 });
             });
         });

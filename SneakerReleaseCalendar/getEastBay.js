@@ -16,10 +16,11 @@ request({url:url},function(err,res,body){
             name:item.P_ModelName+"",
             price:item.P_StyleSalePrice+"",
             link:"http://www.eastbay.com/product/model:"+item.P_ModelNumber+"/sku:"+item.P_StyleSKU+"/",
-            year:item.P_release_year+"",
-            month:item.P_release_month+"",
-            day:item.P_release_day+"",
-            color:item.P_color+""
+            year:(item.P_release_year*1)+"",
+            month:(item.P_release_month*1)+"",
+            day:(item.P_release_day*1)+"",
+            color:item.P_color+"",
+            image:"http://images.eastbay.com/pi/"+item.P_StyleSKU+"/zoom/"
         });
     });
     fs.writeFileSync("./eastbay.json",JSON.stringify(DB) );
