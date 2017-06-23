@@ -62,9 +62,19 @@ var promise2 = new Promise(function(res,rej){
         res(data);
     });
 });
-Promise.all([promise1, promise2]).then(function (values) {
+var promise3 = new Promise(function(res,rej){
+    $.ajax({
+        url: "./SneakerReleaseCalendar/footaction.json",
+        beforeSend: function( xhr ) {
+            console.log("FootAction Start");
+        }
+    }).done(function( data ) {
+        res(data);
+    });
+});
+Promise.all([promise1, promise2,promise3]).then(function (values) {
 
-    var merge = values[0].concat(values[1]);
+    var merge = values[0].concat(values[1]).concat(values[2]);
     var sneakers = {}
     $.each(merge,function(idx,SK){
         if(idx==0){ console.log(SK); };
