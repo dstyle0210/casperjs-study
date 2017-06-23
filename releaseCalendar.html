@@ -19,6 +19,8 @@ ul.lists>li{width:100%;overflow:hidden;}
 .sneaker .store{display:inline-block;position:absolute;top:0;right:0;font-size:12px;font-family:tahoma;padding:3px 5px;}
 .sneaker .store.eastbay{background:#f6d046;}
 .sneaker .store.footlocker{background:#e71836;color:#fff;}
+.sneaker .store.footaction{background:#000;color:#ffb700;}
+.sneaker .store.finishline{background:#008fdb;color:#fff;}
 </style>
 <div id="sneaker">
     <ul>
@@ -72,9 +74,19 @@ var promise3 = new Promise(function(res,rej){
         res(data);
     });
 });
-Promise.all([promise1, promise2,promise3]).then(function (values) {
+var promise4 = new Promise(function(res,rej){
+    $.ajax({
+        url: "./SneakerReleaseCalendar/finishline.json",
+        beforeSend: function( xhr ) {
+            console.log("FootAction Start");
+        }
+    }).done(function( data ) {
+        res(data);
+    });
+});
+Promise.all([promise1, promise2,promise3,promise4]).then(function (values) {
 
-    var merge = values[0].concat(values[1]).concat(values[2]);
+    var merge = values[0].concat(values[1]).concat(values[2]).concat(values[3]);
     var sneakers = {}
     $.each(merge,function(idx,SK){
         if(idx==0){ console.log(SK); };
