@@ -36,7 +36,6 @@ driver.wait(function(){
         data.link = "http://www.footaction.com/product/model:"+sku.model+"/sku:"+sku.sku+"/";
         DB.push(data);
     });
-    fs.writeFileSync("./footaction_example.json",text );
     fs.writeFileSync("./footaction.json",JSON.stringify(DB) );
 });
 driver.quit();

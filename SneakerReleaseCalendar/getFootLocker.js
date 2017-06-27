@@ -35,8 +35,6 @@ driver.wait(function(){
             });
         });
     });
-
-    fs.writeFileSync("./footlocker_example.json",text );
     fs.writeFileSync("./footlocker.json",JSON.stringify(DB) );
 });
 driver.quit();

@@ -6,7 +6,6 @@ var webdriver = require('selenium-webdriver'), By = webdriver.By, until = webdri
 var driver = new webdriver.Builder().forBrowser('chrome').build();
 var url = "http://www.nike.co.kr/mobile/event/getLaunchMainList.lecs?productRelaseDt=U&currentPage=1&perPage=20&cornerNo=1562&displayNo=NK2A13";
 var DB = [];
-var urls = [];
 request({url:url},function(err,res,body){
     var $ = cheerio.load(body);
     $("a").each(function(){
@@ -18,8 +17,6 @@ request({url:url},function(err,res,body){
         });
     });
     getData(0);
-
-    // fs.writeFileSync("./nikekorea.json",JSON.stringify(DB) );
 });
 function getData(idx){
     if(DB.length==idx){
