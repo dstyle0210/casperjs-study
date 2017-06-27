@@ -6,7 +6,6 @@ var DB = [];
 request({url:url},function(err,res,body){
     var jsonStr = body.replace("var products = ","");
         jsonStr = jsonStr.replace("]};","]}");
-        fs.writeFileSync("./eastbay_example.json",jsonStr );
     var sneakers = JSON.parse(jsonStr);
     _.each(sneakers.RECORDS,function(sneaker){
         var item = sneaker.PROPERTIES;

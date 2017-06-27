@@ -1,14 +1,7 @@
-// http://www.finishline.com/ns/common/fa/release-calendar/js/fa-relcal-json.js?cd=0
 var fs = require('fs');
 var _ = require("lodash");
-var webdriver = require('selenium-webdriver'),
-    By = webdriver.By,
-    until = webdriver.until;
-
-var driver = new webdriver.Builder()
-    .forBrowser('chrome')
-    .build();
-
+var webdriver = require('selenium-webdriver'), By = webdriver.By, until = webdriver.until;
+var driver = new webdriver.Builder().forBrowser('chrome').build();
 driver.get('http://www.finishline.com/store/releaseproduct/gadgets/releaseCalendarLookupAPI.jsp');
 driver.sleep(200);
 driver.wait(function(){
@@ -16,10 +9,8 @@ driver.wait(function(){
         return document.body.innerHTML;
     });
 },500).then(function(text){
-
     text = text.replace('<pre style="word-wrap: break-word; white-space: pre-wrap;">','');
     text = text.replace('</pre>','');
-
     var DB = [];
     var json = JSON.parse(text);
     _.each(json.products,function(product){
@@ -33,20 +24,11 @@ driver.wait(function(){
             month:date[0]*1,
             day:date[1]*1,
             color:product.colorDescription+"",
-            image:product.imageURL+""
+            image:"http://images.finishline.com/is/image/FinishLine/"+(product.styleColor).replace("-","_"),
+            link:"http://www.finishline.com/store/product/b/"+product.productId+"?styleId="+(product.styleColor).split("-")[0]+"&colorId="+(product.styleColor).split("-")[1]
         };
-        /*
-        var sku = {}
-        if(product.mens.model!=""){
-            sku = product.mens;
-        }else{
-            sku = product.kids;
-        };
-        */
-        // data.link = "http://www.finishline.com/product/model:"+sku.model+"/sku:"+sku.sku+"/";
         DB.push(data);
     });
-    fs.writeFileSync("./finishline_example.json",text );
     fs.writeFileSync("./finishline.json",JSON.stringify(DB) );
 });
 driver.quit();

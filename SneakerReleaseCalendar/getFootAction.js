@@ -1,14 +1,7 @@
-// http://www.footaction.com/ns/common/fa/release-calendar/js/fa-relcal-json.js?cd=0
 var fs = require('fs');
 var _ = require("lodash");
-var webdriver = require('selenium-webdriver'),
-    By = webdriver.By,
-    until = webdriver.until;
-
-var driver = new webdriver.Builder()
-    .forBrowser('chrome')
-    .build();
-
+var webdriver = require('selenium-webdriver'), By = webdriver.By, until = webdriver.until;
+var driver = new webdriver.Builder().forBrowser('chrome').build();
 driver.get('http://www.footaction.com/ns/common/fa/release-calendar/js/fa-relcal-json.js?cd=0');
 driver.sleep(200);
 driver.wait(function(){

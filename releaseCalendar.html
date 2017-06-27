@@ -13,14 +13,16 @@ ul.lists>li{width:100%;overflow:hidden;}
 .sneakers{width:100%;overflow:hidden;}
 .sneaker{position:relative;float:left;margin-top:5px;margin-left:5px;border:1px solid #ccc;box-sizing:border-box;padding:10px;width:150px;height:250px;overflow:hidden;}
 .sneaker > a{display:block;}
-.sneaker .photo{width:130px;height:130px;overflow:hidden;background:#f5f5f5;}
+.sneaker .photo{box-sizing:border-box;width:130px;height:130px;overflow:hidden;}
 .sneaker .photo img{width:100%;height:auto;}
 .sneaker p{font-size:13px;}
-.sneaker .store{display:inline-block;position:absolute;top:0;right:0;font-size:12px;font-family:tahoma;padding:3px 5px;}
+.sneaker .store{display:inline-block;box-sizing:border-box;position:absolute;top:0;right:0;font-size:12px;font-family:tahoma;padding:3px 5px;}
 .sneaker .store.eastbay{background:#f6d046;}
 .sneaker .store.footlocker{background:#e71836;color:#fff;}
 .sneaker .store.footaction{background:#000;color:#ffb700;}
 .sneaker .store.finishline{background:#008fdb;color:#fff;}
+.sneaker .store.finishline + a .photo{padding-top:30px;}
+.sneaker .store.nike-korea{border:1px solid #ccc;background:#fff;color:#333;font-weight:700;}
 </style>
 <div id="sneaker">
     <ul>
@@ -84,12 +86,37 @@ var promise4 = new Promise(function(res,rej){
         res(data);
     });
 });
-Promise.all([promise1, promise2,promise3,promise4]).then(function (values) {
+var promise5 = new Promise(function(res,rej){
+    $.ajax({
+        url: "./SneakerReleaseCalendar/nike-korea.json",
+        beforeSend: function( xhr ) {
+            console.log("나코 Start");
+        }
+    }).done(function( data ) {
+        res(data);
+    });
+});
+var promise6 = new Promise(function(res,rej){
+    $.ajax({
+        url: "./SneakerReleaseCalendar/adidas-korea.json",
+        beforeSend: function( xhr ) {
+            console.log("나코 Start");
+        }
+    }).done(function( data ) {
+        res(data);
+    });
+});
+Promise.all([promise5,promise6,promise1, promise2,promise3,promise4]).then(function (values) {
 
-    var merge = values[0].concat(values[1]).concat(values[2]).concat(values[3]);
-    var sneakers = {}
+    var merge = values[0].concat(values[1]).concat(values[2]).concat(values[3]).concat(values[4]).concat(values[5]);
+    console.log(merge.length);
+    var sneakers = {};
     $.each(merge,function(idx,SK){
-        if(idx==0){ console.log(SK); };
+        console.log(SK.store+":"+SK.name+":"+SK.year);
+        if(!SK.year){
+            console.log(SK);
+        };
+        // if(idx==0){ console.log(SK); };
         // 월 설정
         if(!sneakers[SK.year+"-"+SK.month]){ // 기존에 없으면
             sneakers[SK.year+"-"+SK.month] = { title:SK.year+"-"+SK.month , days:{} };

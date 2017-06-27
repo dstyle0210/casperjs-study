@@ -1,13 +1,7 @@
 var fs = require('fs');
 var _ = require("lodash");
-var webdriver = require('selenium-webdriver'),
-    By = webdriver.By,
-    until = webdriver.until;
-
-var driver = new webdriver.Builder()
-    .forBrowser('chrome')
-    .build();
-
+var webdriver = require('selenium-webdriver'), By = webdriver.By, until = webdriver.until;
+var driver = new webdriver.Builder().forBrowser('chrome').build();
 driver.get('http://www.footlocker.com/ns/common/fl/js/releaseCalendarJSON.js?cd=0');
 driver.sleep(200);
 driver.wait(function(){

@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "cheerio": "^1.0.0-rc.1",
     "lodash": "^4.17.4",
     "open": "0.0.5",
     "request": "^2.81.0",
