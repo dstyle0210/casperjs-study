@@ -23,13 +23,15 @@ ul.lists>li{width:100%;overflow:hidden;}
 .sneaker .store.finishline{background:#008fdb;color:#fff;}
 .sneaker .store.finishline + a .photo{padding-top:30px;}
 .sneaker .store.nike-korea{border:1px solid #ccc;background:#fff;color:#333;font-weight:700;}
+.sneaker .store.adidas-korea{border:1px solid #ccc;background:#000;color:#fff;font-weight:700;}
+.sneaker .store.ruvilla{background:#393939;color:#00bfaf;}
 </style>
 <div id="sneaker">
     <ul>
         <li v-for="month in sneakers">
             <h2>{{month.title}}</h2>
             <ul class="lists">
-                <li v-for="day in month.days">
+                <li v-for="day in month.days" :id="month.title+'-'+day.title">
                     <h3>{{month.title}} - {{day.title}}</h3>
                     <div class="sneakers">
                         <article v-for="sneaker in day.lists" class="sneaker">
@@ -46,87 +48,46 @@ ul.lists>li{width:100%;overflow:hidden;}
     </ul>
 </div>
 <script>
-var promise1 = new Promise(function(res,rej){
-    $.ajax({
-        url: "./SneakerReleaseCalendar/eastbay.json",
-        beforeSend: function( xhr ) {
-            console.log("eastBay Start");
-        }
-    }).done(function( data ) {
-        res(data);
-    });
+var urls = [
+    "./nike-korea.json",
+    "./adidas-korea.json",
+    "./eastbay.json",
+    "./footlocker.json",
+    "./footaction.json",
+    "./finishline.json",
+    "./ruvilla.json"
+];
+var promises = [];
+$.each(urls,function(idx,url){
+    promises.push(new Promise(function(res,rej){
+        $.ajax({
+            url: url,
+            beforeSend: function( xhr ) {}
+        }).done(function( data ) {
+            res(data);
+        });
+    }));
 });
-var promise2 = new Promise(function(res,rej){
-    $.ajax({
-        url: "./SneakerReleaseCalendar/footlocker.json",
-        beforeSend: function( xhr ) {
-            console.log("FootLocker Start");
-        }
-    }).done(function( data ) {
-        res(data);
-    });
-});
-var promise3 = new Promise(function(res,rej){
-    $.ajax({
-        url: "./SneakerReleaseCalendar/footaction.json",
-        beforeSend: function( xhr ) {
-            console.log("FootAction Start");
-        }
-    }).done(function( data ) {
-        res(data);
-    });
-});
-var promise4 = new Promise(function(res,rej){
-    $.ajax({
-        url: "./SneakerReleaseCalendar/finishline.json",
-        beforeSend: function( xhr ) {
-            console.log("FootAction Start");
-        }
-    }).done(function( data ) {
-        res(data);
-    });
-});
-var promise5 = new Promise(function(res,rej){
-    $.ajax({
-        url: "./SneakerReleaseCalendar/nike-korea.json",
-        beforeSend: function( xhr ) {
-            console.log("나코 Start");
-        }
-    }).done(function( data ) {
-        res(data);
-    });
-});
-var promise6 = new Promise(function(res,rej){
-    $.ajax({
-        url: "./SneakerReleaseCalendar/adidas-korea.json",
-        beforeSend: function( xhr ) {
-            console.log("나코 Start");
-        }
-    }).done(function( data ) {
-        res(data);
-    });
-});
-Promise.all([promise5,promise6,promise1, promise2,promise3,promise4]).then(function (values) {
 
-    var merge = values[0].concat(values[1]).concat(values[2]).concat(values[3]).concat(values[4]).concat(values[5]);
-    console.log(merge.length);
+Promise.all(promises).then(function (values) {
+    var merge = [];
+    $.each(values,function(idx,json){ merge = merge.concat(json); });
+
     var sneakers = {};
     $.each(merge,function(idx,SK){
-        console.log(SK.store+":"+SK.name+":"+SK.year);
-        if(!SK.year){
-            console.log(SK);
-        };
-        // if(idx==0){ console.log(SK); };
+
         // 월 설정
         if(!sneakers[SK.year+"-"+SK.month]){ // 기존에 없으면
             sneakers[SK.year+"-"+SK.month] = { title:SK.year+"-"+SK.month , days:{} };
         };
+
         // 일설정
         if(!sneakers[SK.year+"-"+SK.month].days[SK.day]){
             sneakers[SK.year+"-"+SK.month].days[SK.day] = {title:SK.day,lists:[]};
         };
+
         sneakers[SK.year+"-"+SK.month].days[SK.day].lists.push(SK);
-        // console.log(SK);
+
     });
 
     $.each(sneakers,function(idx,month){
@@ -135,21 +96,36 @@ Promise.all([promise5,promise6,promise1, promise2,promise3,promise4]).then(funct
         Object.keys(data).sort().forEach(function(key) {
             ordered[key] = data[key];
         });
-        console.log(ordered);
     });
-
-
-
-    console.log(sneakers);
 
     console.log("모두 완료됨", values);
     var app = new Vue({
         el: '#sneaker',
+        mounted:function(){
+            function getObj(add){
+                var id = getId(add);
+                if( $(id).length ){
+                    location.href = location.href+id;
+                }else{
+                    getObj(add+1);
+                };
+            };
+            setTimeout(function(){
+                getObj(0);
+            },2000);
+        },
         data: {
             sneakers:sneakers
         }
     })
 });
+
+
+function getId(addDate){
+    var date = new Date();
+    date.setDate( addDate + date.getDate() );
+    return ("#"+date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate());
+}
 
 
 
