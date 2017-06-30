@@ -2,20 +2,20 @@ var open = require("open");
 var webdriver = require('selenium-webdriver'), By = webdriver.By, until = webdriver.until;
 var driver = new webdriver.Builder().forBrowser('chrome').build();
 var Ruvilla = require("./SneakerReleaseCalendar/getRuvilla.js");
-
-
-
-Ruvilla.get(driver,function() {
-
-
-});
-/*
+var Nike = require("./SneakerReleaseCalendar/getNike.js");
 var NikeKorea = require("./SneakerReleaseCalendar/getNikeKorea.js");
 var AdidasKorea = require("./SneakerReleaseCalendar/getAdidasKorea.js");
 var EastBay = require("./SneakerReleaseCalendar/getEastBay.js");
 var FinishLine = require("./SneakerReleaseCalendar/getFinishLine.js");
 var FootAction = require("./SneakerReleaseCalendar/getFootAction.js");
 var FootLocker = require("./SneakerReleaseCalendar/getFootLocker.js");
+
+
+Nike.get(driver,function(){
+    driver.quit();
+});
+
+/*
 
 NikeKorea.get(driver,function() {
     console.log("나이키 코리아 완료.");
@@ -29,8 +29,12 @@ NikeKorea.get(driver,function() {
                     console.log("풋액션 완료.");
                     FootLocker.get(driver,function(){
                         console.log("풋락커 완료.");
-                        driver.quit();
-                        open("http://localhost:63342/js-kids/releaseCalendar.html");
+                        Ruvilla.get(driver,function() {
+                            console.log("루빌라 완료.");
+                            driver.quit();
+                            open("http://localhost:63342/js-kids/releaseCalendar.html");
+                        });
+
                     });
                 });
             });
@@ -38,6 +42,7 @@ NikeKorea.get(driver,function() {
     });
 });
 */
+
 /*
 NikeKorea.get(function(){
     console.log("나이키 코리아 완료.");

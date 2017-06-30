@@ -12,7 +12,6 @@ module.exports = {
             {imgName:'852425-107',brand:'Nike',name:'KOBE A.D.',size:'Mens',price:160,year:2017,month:6,day:3,weekday:'Sat'},
             {imgName:'304775-120',brand:'Jordan',name:'Retro 7',size:'Mens + Kids',price:190,year:2017,month:6,day:3,weekday:'Sat'},
             {imgName:'624041-007',brand:'Nike',name:'Air Foamposite Pro',size:'Mens',price:230,year:2017,month:6,day:9,weekday:'Fri'},
-            //{brand:'Nike',name:'Foamposite Pro',size:'Kids',price:180,year:2017,month:6,day:9,weekday:'Fri'},
             {imgName:'878627-008',brand:'Nike',name:'PG 1',size:'Kids',price:110,year:2017,month:6,day:9,weekday:'Fri'},
             {imgName:'310810-022',brand:'Jordan',name:'Retro 13 Low',size:'Mens',price:175,year:2017,month:6,day:10,weekday:'Sat'},
             {imgName:'BY9951',brand:'Adidas',name:'NMD_R1',size:'Womens',price:130,year:2017,month:6,day:10,weekday:'Sat'},
@@ -24,14 +23,16 @@ module.exports = {
             {imgName:'918228-101',brand:'Nike',name:'DUELIST RACER',size:'Mens',price:120,year:2017,month:6,day:22,weekday:'Wed'},
             {imgName:'CP9654',brand:'Adidas',name:'YEEZY BOOST 350 V2',size:'Mens',price:220,year:2017,month:6,day:24,weekday:'Sat'},
             {imgName:'917931-900',brand:'Jordan',name:'Jordan X Converse Pack',size:'Mens',price:300,year:2017,month:6,day:28,weekday:'Wed'},
-            //{imgName:'CG3038',brand:'Adidas',name:'Ultraboost',size:'Mens',price:200,year:2017,month:6,day:28,weekday:'Wed'},
             {imgName:'19039803',brand:'Puma',name:'Fenty Trainer HI',size:'Womens',price:190,year:2017,month:6,day:29,weekday:'Thur'},
             {imgName:'19039802',brand:'Puma',name:'Fenty Trainer HI',size:'Womens',price:190,year:2017,month:6,day:29,weekday:'Thur'},
-            //{brand:'Puma',name:'Fenty Trainer HI',size:'Womens',price:190,year:2017,month:6,day:29,weekday:'Thur'},
-            //{brand:'Puma',name:'Fenty Trainer HI',size:'Womens',price:190,year:2017,month:6,day:29,weekday:'Thur'},
-            //{imgName:'AA6655-100',brand:'Nike',name:'SF AF1 MID',size:'Mens',price:160,year:2017,month:6,day:30,weekday:'Fri'},
             {imgName:'136027-602-A',brand:'Jordan',name:'Retro 5',size:'Mens + Kids',price:190,year:2017,month:7,day:1,weekday:'Sat'},
-            {brand:'Nike',name:'AIR MORE UPTEMPO 96',size:'Mens',price:160,year:2017,month:7,day:6,weekday:'Thur'},
+            {imgName:'852425-300',brand:'Nike',name:'KOBE A.D.',size:'Mens',price:160,year:2017,month:7,day:1,weekday:'Sat'},
+            {imgName:'897815-001',brand:'Nike',name:'KD 10 FINGERPRINT',size:'Mens',price:150,year:2017,month:7,day:1,weekday:'Sat'},
+            {imgName:'918228-602',brand:'Nike',name:'DUELIST RACER',size:'Mens',price:120,year:2017,month:7,day:1,weekday:'Thur'},
+            {imgName:'918264-001',brand:'Nike',name:'ZOOM MARIAH FLYKNIT RACER',size:'Mens',price:160,year:2017,month:7,day:6,weekday:'Thur'},
+            {imgName:'918264-002',brand:'Nike',name:'ZOOM MARIAH FLYKNIT RACER',size:'Mens',price:160,year:2017,month:7,day:6,weekday:'Thur'},
+            {imgName:'918264-003',brand:'Nike',name:'ZOOM MARIAH FLYKNIT RACER',size:'Mens',price:160,year:2017,month:7,day:6,weekday:'Thur'},
+            {imgName:'414962-105',brand:'Nike',name:'AIR MORE UPTEMPO 96',size:'Mens',price:160,year:2017,month:7,day:6,weekday:'Thur'},
             {brand:'Adidas',name:'EQT SUPPORT 93/17',size:'Mens',price:180,year:2017,month:7,day:8,weekday:'Sat'},
             {brand:'Adidas',name:'EQT SUPPORT 93/17',size:'Mens',price:180,year:2017,month:7,day:8,weekday:'Sat'},
             {brand:'Jordan',name:'Retro 6 Low',size:'Kids',price:120,year:2017,month:7,day:8,weekday:'Sat'},
@@ -52,6 +53,7 @@ module.exports = {
             {brand:'Nike',name:'Lebron 14 Low',size:'Mens',price:150,year:2017,month:7,day:22,weekday:'Sat'},
             {brand:'Jordan',name:'Retro 13',size:'Mens + Kids',price:190,year:2017,month:7,day:22,weekday:'Sat'},
             {brand:'Nike',name:'Air Force 1 Utility Mid',size:'Mens',price:155,year:2017,month:7,day:28,weekday:'Fri'},
+            {brand:'Nike',name:'AIR FOAMPOSITE One',size:'Mens',price:230,year:2017,month:7,day:29,weekday:'Sat'},
             {brand:'Adidas',name:'Ultraboost Laceless',size:'Mens',price:200,year:2017,month:8,day:1,weekday:'Tue'},
             {brand:'Adidas',name:'Ultraboost Laceless',size:'Mens',price:100,year:2017,month:8,day:1,weekday:'Tue'},
             {brand:'New Balance',name:'574 Sport',size:'Mens',price:120,year:2017,month:8,day:5,weekday:'Sat'},
@@ -60,6 +62,7 @@ module.exports = {
             {brand:'New Balance',name:'574 Suede Sport',size:'Mens',price:110,year:2017,month:8,day:5,weekday:'Sat'},
             {brand:'New Balance',name:'574 Sport',size:'Mens',price:100,year:2017,month:8,day:5,weekday:'Sat'},
             {brand:'Jordan',name:'Retro 5',size:'Mens + Kids',price:190,year:2017,month:8,day:5,weekday:'Sat'},
+            {brand:'Nike',name:'AIR MORE UPTEMPO 96',size:'Mens',price:160,year:2017,month:8,day:12,weekday:'Sat'},
             //{brand:'Adidas',name:'NMD_R1 PK',size:'Mens',price:180,year:2017,month:8,day:11,weekday:'Fri'},
             //{brand:'Adidas',name:'NMD_R1 PK',size:'Mens',price:170,year:2017,month:8,day:11,weekday:'Fri'},
             //{brand:'Adidas',name:'NMD_R1 PK',size:'Mens',price:170,year:2017,month:8,day:11,weekday:'Fri'},
@@ -76,6 +79,7 @@ module.exports = {
             //{brand:'Nike',name:'KYRIE 3',size:'Mens',price:120,year:2017,month:9,day:1,weekday:'Fri'},
             //{brand:'Jordan',name:'Retro 5',size:'Mens',price:190,year:2017,month:9,day:2,weekday:'Sat'},
             //{brand:'Jordan',name:'Retro 11 Low IE',size:'Mens',price:170,year:2017,month:9,day:23,weekday:'Sat'},
+            {brand:'Nike',name:'AIR FOAMPOSITE PRO',size:'Mens',price:230,year:2017,month:9,day:8,weekday:'Fri'},
             {brand:'Nike',name:'Air More Uptempo 96',size:'Mens',price:160,year:2017,month:9,day:23,weekday:'Sat'}];
 
 
@@ -97,5 +101,6 @@ module.exports = {
             });
         });
         fs.writeFileSync("./ruvilla.json",JSON.stringify(DB) );
+        CB.call(null);
     }
 };

@@ -2,6 +2,8 @@ var fs = require('fs');
 var _ = require("lodash");
 var request = require("request");
 var cheerio = require('cheerio');
+
+
 module.exports = {
     get:function(driver,CB){
 
@@ -9,12 +11,13 @@ module.exports = {
         var DB = [];
 
         driver.get(url);
-        driver.sleep(200);
+        driver.sleep(1000);
         driver.wait(function(){
             return driver.executeScript(function(){
                 var DDD = [];
                 jQuery(".ondate").each(function(idx,item){
-                    var code = ((jQuery(item).find("img").attr("src")).match(/[A-Z0-9]{6}(-1)/)[0]).replace("-1","");
+                    var code = jQuery(item).find("a.link").wrapAll("<div />").parent().html();
+                    code = (code.match(/[A-Z0-9]{6}/g))[0];
                     var month = jQuery(item).find(".status").text().trim().split(" ")[0];
                     if(month=="jun"){ month = 6 };
                     if(month=="jul"){ month = 7 };
@@ -25,7 +28,7 @@ module.exports = {
                         price:jQuery(item).find(".price").text().trim().replace("원","").replace(",",""),
                         year:"2017",
                         month:month,
-                        day:jQuery(item).find(".status").text().trim().split(" ")[1],
+                        day:(jQuery(item).find(".status").text().trim().split(" ")[1])*1,
                         color:"",
                         link:"http://shop.adidas.co.kr/PF021002.action?PROD_CD="+code
                     });
