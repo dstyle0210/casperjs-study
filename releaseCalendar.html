@@ -15,7 +15,7 @@ ul.lists>li{width:100%;overflow:hidden;}
 .sneaker > a{display:block;color:#333;text-decoration:none;}
 .sneaker .photo{box-sizing:border-box;width:130px;height:130px;overflow:hidden;}
 .sneaker .photo img{width:100%;height:auto;}
-.sneaker p{font-size:13px;}
+.sneaker p{font-size:15px;padding:0;margin:0;}
 .sneaker .store{display:inline-block;box-sizing:border-box;position:absolute;top:0;right:0;font-size:12px;font-family:tahoma;padding:3px 5px;}
 .sneaker .store.eastbay{background:#f6d046;}
 .sneaker .store.footlocker{background:#e71836;color:#fff;}
@@ -33,12 +33,12 @@ ul.lists>li{width:100%;overflow:hidden;}
             <h2>{{month.title}}</h2>
             <ul class="lists" id="lists">
                 <li v-for="day in month.days" :id="month.title+'-'+day.title">
-                    <h3>{{month.title}} - {{day.title}}</h3>
+                    <h3>Release Date By {{month.title}}-{{day.title}}</h3>
                     <div class="sneakers">
                         <article v-for="sneaker in day.lists" class="sneaker">
                             <span class="store" :class="sneaker.store">{{sneaker.store}}</span>
                             <a :href="sneaker.link">
-                                <div class="photo"><img :src="sneaker.image" alt="" onerror="this.style.display='none';" width="100" height="100" /></div>
+                                <div class="photo"><img :src="sneaker.image" alt="" onerror="this.style.display='none';" /></div>
                                 <p>{{sneaker.name}}</p>
                             </a>
                         </article>
@@ -49,6 +49,7 @@ ul.lists>li{width:100%;overflow:hidden;}
     </ul>
 </div>
 <script>
+var sortId;
 var urls = [
     "./nike.json",
     "./nike-korea.json",
@@ -77,15 +78,17 @@ Promise.all(promises).then(function (values) {
 
     var sneakers = {};
     $.each(merge,function(idx,SK){
-
+        var m = ((SK.month<10) ? "0"+SK.month : SK.month);
+        var d = ((SK.day<10) ? "0"+SK.day : SK.day);
+        console.log(m);
         // 월 설정
         if(!sneakers[SK.year+"-"+SK.month]){ // 기존에 없으면
-            sneakers[SK.year+"-"+SK.month] = { title:SK.year+"-"+SK.month , days:{} };
+            sneakers[SK.year+"-"+SK.month] = { title:SK.year+"-"+m , days:{} };
         };
 
         // 일설정
         if(!sneakers[SK.year+"-"+SK.month].days[SK.day]){
-            sneakers[SK.year+"-"+SK.month].days[SK.day] = {title:SK.day,lists:[]};
+            sneakers[SK.year+"-"+SK.month].days[SK.day] = {title:d,lists:[]};
         };
 
         sneakers[SK.year+"-"+SK.month].days[SK.day].lists.push(SK);
@@ -107,6 +110,7 @@ Promise.all(promises).then(function (values) {
             function getObj(add){
                 var id = getId(add);
                 if( $(id).length ){
+                    sortId = id;
                     location.href = location.href+id;
                 }else{
                     getObj(add+1);
@@ -126,8 +130,14 @@ Promise.all(promises).then(function (values) {
 function getId(addDate){
     var date = new Date();
     date.setDate( addDate + date.getDate() );
-    return ("#"+date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate());
+    var m = ((date.getMonth()+1)<10) ? "0"+(date.getMonth()+1) : (date.getMonth()+1);
+    var d = (date.getDate()<10) ? "0"+date.getDate() : date.getDate();
+    return ("#"+date.getFullYear()+"-"+m+"-"+d);
 }
+
+function setHTML(){
+    return $(sortId).html();
+};
 
 
 
