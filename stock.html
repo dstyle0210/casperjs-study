@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body>
+<style>
+table{width:100%;}
+th,td{border:1px solid #000;}
+</style>
+<div id="app">
+    <table>
+        <thead>
+        <tr>
+            <th>회사명</th>
+            <th>현재주가</th>
+            <th>예상배당금</th>
+            <th>예상배당률</th>
+            <th>작년배당금</th>
+            <th>작년배당률</th>
+            <th>외국인취득률</th>
+            <th>외국인,기관 연속수</th>
+            <th>ROE</th>
+            <th>PER</th>
+            <th>PBR</th>
+        </tr>
+        </thead>
+        <tr v-for="stock in stocks">
+            <td>{{stock.name}}</td>
+            <td>{{stock.priceInt}}</td>
+            <td>{{stock.preRefund}}</td>
+            <td>{{stock.preRefundRate}}</td>
+            <td>{{stock.oldRefund}}</td>
+            <td>{{stock.refundRate}}%</td>
+            <td>{{stock.frRate}}%</td>
+            <td>{{stock.plus}}</td>
+            <td>{{stock.ROE}}</td>
+            <td>{{stock.per}}</td>
+            <td>{{stock.PBR}}</td>
+        </tr>
+    </table>
+</div>
+
+<script>
+    var app;
+    $.ajax("stock.json",{
+        success:function(body,err,jq){
+            $(body).each(function(idx,item){
+                item.priceInt = item.price.match(/[0-9\.]/gi).join("") * 1; // 현재주가 숫자형변환
+                if(item.preRefund==""){
+                    item.preRefund = (item.oldRefund);
+                };
+                item.preRefundRate = (item.preRefund/item.priceInt)*100; // 예상배당률 계산(예상배당금 기준)
+
+
+            });
+
+            app = new Vue({
+                el: '#app',
+                data: {
+                    stocks: body
+                }
+            })
+        }
+    })
+
+</script>
+
+</body>
+</html>
