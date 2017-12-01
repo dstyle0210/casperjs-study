@@ -5,19 +5,19 @@ var webdriver = require('selenium-webdriver'),
 var driver = new webdriver.Builder()
     .forBrowser('chrome')
     .build();
-var url = "http://www.nike.co.kr/snkrs/detail.lecs?displayNo=NK1A86A51";
+var url = "http://www.nike.co.kr/snkrs/detail.lecs?displayNo=NK1A86B26";
 driver.get(url);
 driver.findElement(By.css('.global_login a')).click();
 driver.wait(function(){
     return until.elementLocated(By.name('loginId'));
 },1000);
-driver.findElement(By.name('loginId')).sendKeys('blackrabit'); // 수정필요.
-driver.findElement(By.name('password')).sendKeys('bobby2'); // 수정필요.
+driver.findElement(By.name('loginId')).sendKeys(''); // 수정필요.
+driver.findElement(By.name('password')).sendKeys(''); // 수정필요.
 driver.findElement(By.css('.global_id_pass_info a')).click();
 driver.sleep(500);
 driver.wait(function(){
     return driver.executeScript(function(){
-        return $(".global_login_window > a").text().trim()=="원용봉님"; // 수정필요.
+        return $(".global_login_window > a").text().trim()==""; // 수정필요.
     });
 },500).then(function(){
     driver.wait(function(){
